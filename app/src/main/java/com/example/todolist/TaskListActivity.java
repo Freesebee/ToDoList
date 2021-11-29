@@ -1,11 +1,11 @@
-
 package com.example.todolist;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-public class MainActivity extends SingleFragmentActivity {
+public class TaskListActivity extends SingleFragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
