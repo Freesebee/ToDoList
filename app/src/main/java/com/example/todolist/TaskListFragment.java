@@ -1,5 +1,6 @@
 package com.example.todolist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -71,7 +72,9 @@ public class TaskListFragment extends Fragment {
 
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra(KEY_EXTRA_TASK_ID, task.getId());
+            startActivity(intent);
         }
     }
 
