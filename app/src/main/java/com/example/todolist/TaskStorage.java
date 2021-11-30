@@ -1,7 +1,12 @@
 package com.example.todolist;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class TaskStorage {
     private static final TaskStorage instance = new TaskStorage();
@@ -16,5 +21,14 @@ public class TaskStorage {
             task.setDone(i % 3 == 0);
             tasks.add(task);
         }
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public Task getTask(UUID taskId) {
+        return tasks.stream().filter(t -> t.getId().equals(taskId)).findFirst().get();
     }
 }

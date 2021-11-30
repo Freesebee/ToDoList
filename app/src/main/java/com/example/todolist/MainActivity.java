@@ -1,11 +1,18 @@
 
 package com.example.todolist;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
+import java.util.UUID;
 
 public class MainActivity extends SingleFragmentActivity {
+
+    private static final String KEY_EXTRA_TASK_ID = "taskId";
+    private Task task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,16 +24,14 @@ public class MainActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment =  fragmentManager.findFragmentById(R.id.fragment_container);
+        UUID taskId = (UUID) getIntent().getSerializableExtra(TaskListFragment.KEY_EXTRA_TASK_ID);
+        return TaskFragment.newInstance(taskId);
+    }
 
-        if(fragment == null) {
-            fragment = new TaskFragment();
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_container, fragment)
-                    .commit();
-        }
-
-        return fragment;
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(this, MainActivity.class); //TODO: add getActivity() instead of "this"
+        intent.putExtra(KEY_EXTRA_TASK_ID, task.getId());
+        startActivity(intent);
     }
 }
